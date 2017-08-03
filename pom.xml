@@ -59,6 +59,12 @@
       <groupId>com.netflix.servo</groupId>
       <artifactId>servo-core</artifactId>
       <version>${servo.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 
@@ -167,6 +173,31 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>releases</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.8</version>
+            <executions>
+              <execution>
+                <id>default-deploy</id>
+                <phase>deploy</phase>
+                <goals>
+                  <goal>deploy</goal>
+                  <goal>nexus-staging:release</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
   <distributionManagement>
     <snapshotRepository>

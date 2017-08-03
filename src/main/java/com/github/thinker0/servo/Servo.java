@@ -176,7 +176,7 @@ public class Servo extends AbstractModule {
                             // TODO double/int/...
                             if (isCounter(metric) && metric.getNumberValue().longValue() > 0) {
                                 final String tags = metricTags(metric); // metric to String
-                                final String line = String.format("PUT %s %d %s %s\r\n",
+                                final String line = String.format("put %s %d %s %s\r\n",
                                     metric.getConfig().getName(), metric.getTimestamp(),
                                     metric.getValue().toString(), tags);
                                 int write = client.write(encoder.encode(CharBuffer.wrap(line)));
